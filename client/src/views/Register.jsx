@@ -1,15 +1,30 @@
-import React, { useState } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
 import axios from "axios";
-export default function Login(props) {
-  console.log(props);
-
+import { register } from "../js/actions/auth";
+import logo from "assets/img/logoProject.png";
+function RegisterPage() {
   const [newUser, setUser] = useState({
     name: "",
     email: "",
     password: "",
-    passwordC: ""
+    password2: ""
+  });
+  const dispatch = useDispatch();
+  const addUser = () => {
+    dispatch(register(newUser));
+  };
+
+  document.documentElement.classList.remove("nav-open");
+  useEffect(() => {
+    document.body.classList.add("register-page");
+    return function cleanup() {
+      document.body.classList.remove("register-page");
+    };
   });
 
   function validateForm() {
@@ -22,15 +37,16 @@ export default function Login(props) {
 
     // console.log(props.history);
     // props.history.push("/admin");
-    axios
-      .post("/api/users", newUser)
-      .then(res => console.log(res.data))
-      .catch(err => console.log(err.response.data));
+    // axios
+    //   .post("/api/users", newUser)
+    //   .then(res => console.log(res.data))
+    //   .catch(err => console.log(err.response.data));
   }
 
   return (
     <div className="Login">
       <form onSubmit={handleSubmit}>
+        <img src={logo} style={{ width: "200px", marginLeft: "10px" }} />
         <div className="Formulair">
           <FormGroup controlId="Name" bsSize="large">
             <ControlLabel>Name</ControlLabel>
@@ -59,11 +75,11 @@ export default function Login(props) {
               type="password"
             />
           </FormGroup>
-          <FormGroup controlId="passwordC" bsSize="large">
-            <ControlLabel>PasswordC</ControlLabel>
+          <FormGroup controlId="password2" bsSize="large">
+            <ControlLabel>Password2</ControlLabel>
             <FormControl
-              value={newUser.passwordC}
-              onChange={e => setUser({ ...newUser, passwordC: e.target.value })}
+              value={newUser.password2}
+              onChange={e => setUser({ ...newUser, password2: e.target.value })}
               type="password"
             />
           </FormGroup>
@@ -73,11 +89,13 @@ export default function Login(props) {
             bsSize="large"
             disabled={!validateForm()}
             type="submit"
+            onClick={addUser}
           >
-            Login
+            S'inscrire
           </Button>
         </div>
       </form>
     </div>
   );
 }
+export default RegisterPage;

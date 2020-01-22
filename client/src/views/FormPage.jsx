@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
 import axios from "axios";
+import logo from "assets/img/logoProject.png";
 export default function Login(props) {
   console.log(props);
 
@@ -29,6 +30,7 @@ export default function Login(props) {
   return (
     <div className="Login">
       <form onSubmit={handleSubmit}>
+        <img src={logo} style={{ width: "200px", marginLeft: "10px" }} />
         <div className="Formulair">
           <FormGroup controlId="email" bsSize="large">
             <ControlLabel>Email</ControlLabel>
