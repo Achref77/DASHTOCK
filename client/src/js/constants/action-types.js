@@ -8,14 +8,6 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
 
-// Profile Const
-export const GET_PROFILE = "GET_PROFILE";
-export const PROFILE_ERROR = "PROFILE_ERROR";
-export const SET_PROFILE = "SET_PROFILE";
-export const CLEAR_PROFILE = "CLEAR_PROFILE";
-export const PROFILE_FAIL = "PROFILE_FAIL";
-
-// Search Traject
-
-export const POINT_LOADED = "POINT_LOADED";
-export const POINT_LOADED_FAILED = "POINT_LOADED_FAILED";
+export const LOAD_USER = "LOAD_USER";
+export const LOAD_FAIL = "LOAD_FAIL";
+export const LOAD_SUCCESS = "LOAD_SUCCESS";

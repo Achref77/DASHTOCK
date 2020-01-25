@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
-import axios from "axios";
 import { register } from "../js/actions/auth";
 import logo from "assets/img/logoProject.png";
-function RegisterPage() {
+function RegisterPage(props) {
   const [newUser, setUser] = useState({
     name: "",
     email: "",
@@ -15,9 +14,9 @@ function RegisterPage() {
     password2: ""
   });
   const dispatch = useDispatch();
-  const addUser = () => {
-    dispatch(register(newUser));
-  };
+  // const addUser = () => {
+  //   dispatch(register(newUser));
+  // };
 
   document.documentElement.classList.remove("nav-open");
   useEffect(() => {
@@ -34,7 +33,9 @@ function RegisterPage() {
 
   function handleSubmit(event) {
     event.preventDefault();
-
+    dispatch(register(newUser))
+      .then(data => props.history.push("/login"))
+      .catch(err => console.log(err));
     // console.log(props.history);
     // props.history.push("/admin");
     // axios
@@ -83,16 +84,18 @@ function RegisterPage() {
               type="password"
             />
           </FormGroup>
+          {/* <Link to="./login"> */}
           <Button
             className="submitForm"
             block
             bsSize="large"
             disabled={!validateForm()}
             type="submit"
-            onClick={addUser}
+            onClick={event => handleSubmit(event)}
           >
             S'inscrire
           </Button>
+          {/* </Link> */}
         </div>
       </form>
     </div>

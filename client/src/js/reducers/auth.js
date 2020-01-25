@@ -5,7 +5,8 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT
+  LOGOUT,
+  LOAD_SUCCESS
 } from "../constants/action-types";
 
 const initialState = {
@@ -14,7 +15,7 @@ const initialState = {
   loading: true,
   user: {
     name: "",
-    mail: "",
+    email: "",
     password: "",
     avatar: ""
   }
@@ -51,6 +52,37 @@ const auth = (state = initialState, action) => {
         loading: false
       };
 
+    // default:
+    //   return state;
+
+    case REGISTER_SUCCESS:
+      return {
+        ...state,
+        data: payload,
+        isAuth: true,
+        loading: false
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        data: payload,
+        isAuth: true,
+        loading: false
+      };
+    case LOGIN_FAIL:
+      return {
+        ...state,
+        data: payload,
+        isAuth: false,
+        loading: false
+      };
+    case LOAD_SUCCESS:
+      return {
+        ...state,
+        data: payload,
+        isAuth: true,
+        loading: false
+      };
     default:
       return state;
   }
